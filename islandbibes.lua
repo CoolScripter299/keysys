@@ -1,3 +1,17 @@
+local http_request = syn and syn.request or request;
+local hwidPaste = loadstring(game:HttpGet("https://raw.githubusercontent.com/CoolScripter299/Script_Whitelist./main/Whitelist_Users.lua"))()
+
+local body = http_request({Url = 'https://httpbin.org/get'; Method = 'GET'}).Body;
+local decoded = game:GetService('HttpService'):JSONDecode(body)
+local hwid = decoded.headers['Syn-Fingerprint']
+
+for i, v in pairs(hwidPaste) do
+    if v == hwid then
+    else
+        game.Players.LocalPlayer:Kick('Not Whitelisted')
+    end
+end
+
 local OrionLib = loadstring(game:HttpGet(('https://gist.githubusercontent.com/alt-er1/048a3633cc4752e578fe8386a554e087/raw/a2ebc46e4912c6eaf1f0d06d0f45cf7db477f025/DevInc.lua')))()
 local Window = OrionLib:MakeWindow({Name = "Island bribes", HidePremium = false,IntroText = "eeak!",IntroEnabled = true, SaveConfig = true, ConfigFolder = "OrionTest"})
 
